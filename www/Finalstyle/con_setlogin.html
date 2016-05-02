@@ -1,0 +1,22 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+	<form method="post" action="http://cesc.co.in/ptrlineins/quickpay_mobapp/paymentapp.php" id="pay_with_cons_id">
+		<input type="hidden" name="txt_custid" id="txt_custid">
+	</form>
+	<form method="post" action="http://cesc.co.in/ptrlineins/quickpay_mobapp/paymentapp.php" id="pay_without_cons_id">
+	</form>
+	<script>
+		function set_cons_id(){
+			testObject={"cnsstat":"1","chk_dgt":"8","consnum":"5703103803","consname":"MINAKSHA MANDALL","addr1":"49 BELILIUS LANE ","addr2":"HOWRAH 711 101 ","addr3":" ","rnd_grs":"1050","rnd_net":"1030","duedt":"13/10/2011","mmyy":"0911","sdheld":" 0.00","pmntmmyy":"X","pmntamt":"","pmntmode":"","pmntdt":"01/01/1951","pmntmkr":"unpaid","mail_id":"minaksha.mandal@rp-sg.in","mob_no":"9874546992","mntblsd":"","sdint":"","rate":"1","rate_desc":"Domestic","mtr_rate":"X 10.00?","mtr_type":"1$","load":"2.4","bill_monyr":"SEP-2011","bill_unit":"209","mntbldt":"","sdhelddt":"","acconschk":"4","barind":"Y","custid":"57000447525","addr4":" ","addr5":" ","addr6":" ","addr7":" ","mmyycd":"8","bl_mkr":"B","mtr_num":"3964838","rnd_net_rvsd":"","rnd_grs_rvsd":"","due_dt_rvsd":"","abt_bccd":"","ebillreg":"Y"};
+
+		localStorage.setItem('storemyjson', JSON.stringify(testObject));
+		}
+		set_cons_id();
+		//window.localStorage.removeItem("storemyjson");
+
+	</script>
+    </body>
+</html>

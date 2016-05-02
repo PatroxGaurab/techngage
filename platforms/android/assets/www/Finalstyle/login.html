@@ -1,0 +1,26 @@
+<div data-role="popup" id="login">
+	<div data-role="header">
+		<h1 class='nd-title'>Login</h1>
+	</div>
+
+	<div data-role="content" style="padding:5px">
+	    <p>Choose the account you want to login from</p>
+		<a href="main.html" class="ui-btn" data-ajax="false">Bidyut Bahon Kar</a><br>
+		<a href="main.html" class="ui-btn" data-ajax="false">Some other User Name</a><br><br>
+		<a href="newaccount.html" class="ui-btn ui-btn-raised m2545">Add New Account</a><br>
+		<div data-role="collapsible">
+			<h3>Login from ht account</h3>
+			<div class='inset'>
+				<form action="mainht.html">
+					<label for="custid">User ID:</label>
+					<input type="text" required name="custid" id="custid" value="" data-clear-btn="true" placeholder="That you got from web signup">
+					<label for="password">Password:</label>
+					<input type="password" required name="password" id="password" value="" data-clear-btn="true" placeholder="That you got from web signup">
+					<button type="submit" class="ui-btn ui-btn-raised m2545">Login</button>
+				</form>
+			</div>
+		</div>
+	    <!--a href="dialog/index.html" data-rel="back" data-role="button" data-inline="true" class="ui-btn ui-btn-primary"><i class='zmdi zmdi-check'></i> Sounds good</a-->
+	    <a href="dialog/index.html" data-rel="back" data-role="button" data-inline="true" class="ui-btn ui-btn-primary"><i class='zmdi zmdi-cancel'></i> Cancel</a>
+	</div>
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>nativeDroid II - jQueryMobile Template</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/test.css" />
+
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	</head>
+	<body>
+		<div id="splash" style="position:absolute; top:0;left:0; width:100%; height:100%; background: black url(cesc_splash.jpg); background-position:center; background-size:cover; z-index:1000;"></div>	
+		<div data-role="page">
+		<a href="start.html" id="starting">&nbsp;</a>
+		</div>
+
+		<script src="vendor/jquery.min.js"></script>
+		<script src="vendor/jquery-ui.min.js"></script>
+		<script src="vendor/jquery.mobile.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+		<script>
+			$(function(){
+				setTimeout(function(){
+					$('#starting').click();},2000);
+				setTimeout(function(){
+					$('#splash').fadeOut(500);											
+					$('.cycler').css('height', $('.cycler :first-child').height());
+					},3500);
+			});
+			
+			$(function(){
+					$('.cycler').css('height', $('.cycler :first-child').height());
+					$('.cycler img:gt(0)').hide();
+					setInterval(function(){
+					  $('.cycler :first-child').fadeOut()
+						 .next('img').fadeIn()
+						 .end().appendTo('.cycler');}, 
+					  5000);
+				});
+				
+			$(function(){
+				var size= $( document ).width()<$( document ).height()?$( document ).width():$( document ).height();
+				$(".gradcont").css('font-size',Math.floor(size/600*16)+"px");
+			});
+		</script>
+	
+				<nd2-include data-src="theft.html"></nd2-include>
+	</body>
+</html>

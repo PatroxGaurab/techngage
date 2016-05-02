@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>nativeDroid II - jQueryMobile Template</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/test.css" />
+
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	</head>
+	<body>		
+		<div data-role="page" class="m0grad">
+			
+			<div role="main" class="ui-content" data-inset="false" class="wow fadeIn">
+				<div data-role="header" data-position="fixed"class="wow fadeIn">
+					<h1 class="wow fadeIn" data-wow-delay='0.3s'>CESC</h1><div class="ui-btn-right" style="background:white"><img style="height:4em;padding:2px" src="logo.png"></div>
+				</div>
+				<div class="cycler mainbanner">	
+					<img src="power.jpg" class="active">
+					<img src="city.jpg">
+				</div>
+				<div class="row gradcont">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="padding:0">
+						<div class="box"><a href="quickpay.html" class="ui-btn ui-btn-icon-block ui-btn-raised m2x m252"><i class='zmdi zmdi-collection-text zmd-4x'></i>Quick Bill Pay</a></div>
+					</div>	
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="padding:0">
+						<div class="box"><a href="#login" class="ui-btn ui-btn-icon-block ui-btn-raised m2x m251" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><i class='zmdi zmdi-sign-in zmd-4x'></i>Login</a></div>
+					</div>				
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="padding:0">
+						<div class="box"><a href="#theft" class="ui-btn ui-btn-icon-block ui-btn-raised m2x m255" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><i class='zmdi zmdi-alert-triangle zmd-4x'></i>Report Theft</a></div>
+					</div>					
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="padding:0">
+						<div class="box"><a href="#connstatus" class="ui-btn ui-btn-icon-block ui-btn-raised m2x m2545" data-rel="popup" data-position-to="window" data-inline="true" data-transition="pop"><i class='zmdi zmdi-flash zmd-4x'></i>New Connection <br>Status</a></div>
+					</div>			
+				</div>
+				<nd2-include data-src="footer.html"></nd2-include>
+				<nd2-include data-src="login.html"></nd2-include>
+				<nd2-include data-src="theft.html"></nd2-include>
+				<nd2-include data-src="connstatus.html"></nd2-include>
+				<script>
+								
+					if(typeof $ !== "undefined"){$(function(){
+						var size= $( document ).width()<$( document ).height()?$( document ).width():$( document ).height();
+						$(".gradcont").css('font-size',Math.floor(size/600*16)+"px");
+						$('.cycler').css('height', $(window).width()*.45);
+						$('.cycler img:gt(0)').hide();
+					});}
+					
+				</script>
+			</div>
+
+		</div>
+
+		<script src="vendor/jquery.min.js"></script>
+		<script src="vendor/jquery-ui.min.js"></script>
+		<script src="vendor/jquery.mobile.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+		<script>
+			$(function(){
+				var size= $( document ).width()<$( document ).height()?$( document ).width():$( document ).height();
+				$(".gradcont").css('font-size',Math.floor(size/600*16)+"px");
+				$('.cycler').css('height', $(window).width()*.45);
+				$('.cycler img:gt(0)').hide();
+				setInterval(function(){
+				  $('.cycler :first-child').fadeOut()
+					 .next('img').fadeIn()
+					 .end().appendTo('.cycler');}, 
+				  5000);
+			});
+		</script>
+	</body>
+</html>

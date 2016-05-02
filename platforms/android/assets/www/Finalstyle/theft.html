@@ -1,0 +1,21 @@
+<div data-role="popup" id="theft">
+	<div data-role="header">
+		<h1 class='nd-title'>Report Theft</h1>
+	</div>
+
+	<div data-role="content" style="padding:5px">
+	    <p>Please provide details of theft</p>
+		<label for="offname">Offender's Name:</label>
+		<input type="text" name="offname" id="offname" value="" data-clear-btn="true" placeholder="Name or identification of offender">
+		<label for="locguid">Location guidance:</label>
+		<textarea rows="3" name="locguid" id="locguid" placeholder="Guide us as to where this happened exactly"></textarea>
+		<label for="theftdet">Details of theft:</label>
+		<textarea rows="3" name="theftdet" id="theftdet" placeholder="Let us know more about it"></textarea>
+		<label for="timedur">Time/Duration of theft:</label>
+		<input type="text" name="timedur" id="timedur" value="" data-clear-btn="true" placeholder="When did it happen and for how long?">
+		<label for="remarks">Remarks:</label>
+		<textarea rows="3" name="remarks" id="remarks" placeholder="e.g. Description of the person & Establishment and any Visible/Identifiable Landmark"></textarea>
+	    <a href="dialog/index.html" data-rel="back" data-role="button" data-inline="true" class="ui-btn ui-btn-raised m2545"><i class='zmdi zmdi-check'></i> Submit </a>
+	    <a href="dialog/index.html" data-rel="back" data-role="button" data-inline="true" class="ui-btn ui-btn-primary"><i class='zmdi zmdi-close'></i> Cancel</a>
+	</div>
+</div>

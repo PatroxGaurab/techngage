@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<script src="jquery.min.js"></script>
+<script>
+function x(){
+
+
+            var myInterval = false;
+            var index = 0;
+            var elements = ["#div1","#div2","#div3"];
+            myInterval = setInterval(AutoScroll, 5000);
+
+            function AutoScroll() {
+alert($(elements[index]).offset().top);
+                $('#noti_div').animate({
+                    scrollTop: $(elements[index]).offset().top
+                }, 1000);
+
+                if(index < (elements.length - 1)){
+                    index++;
+                } else {
+                    index = 0;
+                }
+            }
+
+}
+</script>
+   <body>
+<input type="button" onclick="x()" value="xx">
+<div id="wrapper5">
+	<div style="width: 100%;text-align: center;">
+		<h1 class="text-success">News Feed</h1>
+	</div>
+
+	<div id="noti_div" style="overflow-y:scroll;position:absolute;height:200px;">
+		<div class="row" id="div1" style="height:125px;">
+sdfsdfrearewr
+		</div>
+		<div class="row" id="div2"  style="height:135px;">
+evrsdafrea
+		</div>
+		<div class="row" id="div3"  style="height:145px;">
+vrtqteqrtretr
+		</div>
+	</div>
+
+</div>
+  </body>
+</html>

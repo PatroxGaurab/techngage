@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+<meta http-equiv="Content-Security-Policy" 
+         content="default-src *; 
+                  style-src * 'self' 'unsafe-inline' 'unsafe-eval'; 
+                  script-src * 'self' 'unsafe-inline' 'unsafe-eval';">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/ripples.css">
+<link rel="stylesheet" type="text/css" href="weather-icons-master/css/weather-icons.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+				margin-top: 0px;
+        height: 100%;
+      }
+    </style>
+	
+
+<!--         For Weather UI   ------------>
+
+
+
+<!--         For Weather UI   ------------>
+
+
+<style>
+   #wrapper { position: fixed; height: 55px;width:100%;bottom: 0;left:0;right:0;float: left;}
+   #wrapper2 { position: fixed; height: 55px;width:100%;bottom: 55px;left:0;right:0;float: left;display:none;}
+   #wrapper3 { position: fixed; width:100%;bottom: 55px;left:0;right:0;top:55px;background-color: white;float: left;display:none;}
+   #wrapper4 { position: fixed; width:100%;bottom: 55px;left:0;right:0;top:55px;background-color: white;float: left;display:none;}
+   #wrapper5 { position: absolute; width:100%;bottom: 55px;left:0;right:0;top:55px;background-color: white;float: left;display:none;}
+div.noti_div_small{
+	background-color:rgba(247, 93, 89,0.6);
+	padding:10px;
+	margin-top:5px;
+	color:#fff;
+}
+div.menu_tab{
+	float: left;
+	left:0;
+	top:0;
+	height: 100%;
+	width:25%;
+	text-align: center;
+	color:#fff;
+	font-size:17px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight:bold;
+
+}
+div#menu1{
+	background-color:#FF00FF;
+	padding-top:17px;
+}
+div#menu2{
+	background-color:#FFA62F;
+	padding-top:17px;
+}
+div#menu3{
+	background-color:#7F38EC;
+	padding-top:17px;
+}
+div#menu4{
+	background-color:#B1FB17;
+	padding-top:17px;
+}
+
+div#menu11{
+	background-color:rgba(255, 215, 0,0.8);
+	padding-top:6px;
+}
+div#menu12{
+	background-color:rgba(255, 215, 0,0.8);
+	padding-top:10px;
+}
+div#menu13{
+	background-color:rgba(255, 215, 0,0.8);
+	padding-top:10px;
+}
+div#menu14{
+	background-color:rgba(255, 215, 0,0.8);
+	padding-top:10px;
+}
+div.menu_tab1{
+	float: left;
+	left:0;
+	top:0;
+	height: 100%;
+	width:25%;
+	text-align: center;
+	color:#fff;
+	font-size:17px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight:bold;
+}
+   /*#over_map { position: absolute; top: 10%; left: 35%; z-index: 99;  
+		  width:60px;
+	          height:70px; 
+		  -moz-border-radius:45px;
+		  -webkit-border-radius:45px;
+		  border-radius:45px;
+		  border: solid 10px ; 
+		  background-color: rgba(255,215,0,0.8);
+		  border-color: rgba(255,215,0,0.4); 
+		  color:#fff;
+	}
+   #over_map { position: absolute; top: 10%; left: 35%; z-index: 99;  
+		  width:60px;
+	          height:70px; 
+		  -moz-border-radius:45px;
+		  -webkit-border-radius:45px;
+		  border-radius:45px;
+		  border: solid 0px ; 
+		  background-color: rgba(204, 0, 153,0.9);
+		  border-color: rgba(204, 0, 153,0.4); 
+		  color:#fff;
+	}*/
+   #over_map { position: absolute; top: 10%; left: 35%; z-index: 99;  
+		  width:60px;
+	          height:70px; 
+		  -moz-border-radius:45px;
+		  -webkit-border-radius:45px;
+		  border-radius:45px;
+		  border: solid 0px ; 
+		  background-color: rgba(153, 250, 56,0.9);
+		  border-color: rgba(153, 250, 56,0.4); 
+		  color:#fff;
+	}
+	.infowin_style{
+		background-color:red !important;
+	}
+   #title_div { position: absolute; top: 0; left: 0; z-index: 99;  
+		  width:100%;
+	          height:60px; 
+		  border: solid 0px ; 
+		  background-color: rgba(192, 192, 192,0.9);
+		  border-color: rgba(192, 192, 192,0.4); 
+		  color:#fff;
+	}
+   #weather_div { position: absolute; top: 0px; right: 0; z-index: 99;  
+		  /*width:100%;*/
+	    height:70px; 
+		  border: solid 0px ; 
+		  /*background-color: rgba(204, 0, 153,0.9);
+		  border-color: rgba(204, 0, 153,0.4);*/ 
+		  color:#fff;
+		  font-size:37px;
+		  font-family: 'Source Sans Pro', sans-serif;
+		  padding-top:10px;
+		  padding-left:20px;
+		  padding-right:5px;
+	}
+	.btn1{
+			float: right;
+ 		 color: #fff;
+		 font-stretch: extra-condensed;
+ 		 background-color: #6496c8;
+ 	 	 border: none;
+	   border-radius: 15px;
+	}
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
+.circle_div{
+	border: 1px solid blue;
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+}
+.menu_tab41{
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	border: 1px solid black;
+	
+}
+</style>
+  </head>
+
+  <body>
+
+
+
+<div style="position:fixed;width:100%;height:100%;background-color:#fff;z-index:1111;text-align:center;" id="spin">
+	<img src="../img/hourglass.svg" style="margin-top:45%;">
+</div>
+<div class="navbar navbar-default" style="height:70px;position: fixed;width:100%;z-index: 999;background-color:#2B65EC;">
+  <div class="container">
+    <div class="navbar-header">
+      <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button-->
+      <a class="navbar-brand" href="javascript:void(0)"><!--img src="../img/ub6.png" height="80px" style="top:-10px;position:absolute;"--></a>
+    </div>
+	<div class="nav navbar-nav navbar-middle">
+		<a href="javascript:togg_notification();" class="btn btn-warning btn-fab" style="padding:5px;margin-top: -20px;margin-left: 10px;"><img src="../img/ghonti.png" width="40px"></a>
+	</div>
+					<div id="weather_div">
+						<label id="weather-temp" style="font-size:37px;font-family: 'Source Sans Pro', sans-serif;color: #fff"></label>
+						<i id="weather-logo"></i>
+					</div>
+  </div>
+</div>
+
+
+
+   <div id="map">
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="wrapper">
+	<a href="javascript:show_hosp();"><div id="menu1" class="menu_tab">
+		Hospital
+	</div><a/>
+	<a href="javascript:show_plc();"><div id="menu2" class="menu_tab">
+		Places
+	</div></a>
+	<a href="javascript:show_your_corner();"><div id="menu3" class="menu_tab">
+		Your Corner
+	</div></a>
+	<a href="javascript:show_about_us();"><div id="menu4" class="menu_tab">
+		About Us
+	</div></a>
+</div>
+<div id="wrapper2">
+	<a href="javascript:show_places_of_choice('police');"><div id="menu11" class="menu_tab1">
+		Police Station
+	</div></a>
+	<a href="javascript:show_places_of_choice('parking');"><div id="menu12" class="menu_tab1">
+		Parking
+	</div></a>
+	<a href="javascript:show_places_of_choice('fire_station');"><div id="menu13" class="menu_tab1">
+		Fire Brigade
+	</div></a>
+	<a href="javascript:show_places_of_choice('atm');"><div id="menu14" class="menu_tab1">
+		ATM
+	</div></a>
+</div>
+<div id="wrapper3">
+	<!--div style="width: 100%;text-align: center;height: 100px;">
+		<img src="../img/ub6.png" height="100px" style="position:absolute;">
+	</div-->
+
+
+	<!--div style="width: 100%;text-align: center;"-->
+		<div style="float: left;width: 100%;margin-top: 50px;height: 100px;">
+			<div style="float: left;width: 40%;text-align: right;">
+				<h4 class="text-success">Team </h4>
+			</div>
+			<div style="float: left;width: 60%;margin-top: -33px;">
+				<img src="../img/ub6.png" height="80px">
+			</div>
+		</div>
+	<!--/div-->
+
+	<div class="row">
+		<div class="col-md-6">
+			<div style="width: 100%;float: left;padding-top: 20px;">
+				<div style="width: 40%;float: left;text-align: center;">
+					<div class="circle_div" style="margin-left: 10px;">
+						<span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 40px;margin-top: 7px;"></span>
+					</div>
+				</div>
+				<div style="width: 60%;float: left;text-align: left;">
+						<h3>Gaurab Patra</h3>
+				</div>
+
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div style="width: 100%;float: left;padding-top: 20px;">
+				<div style="width: 40%;float: left;text-align: center;">
+					<div class="circle_div" style="margin-left: 10px;">
+						<span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 40px;margin-top: 7px;"></span>
+					</div>
+				</div>
+				<div style="width: 60%;float: left;text-align: left;">
+						<h3>Subhasish Kundu</h3>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div id="wrapper4" style="padding: 15px;padding-top: 20px;overflow-y: auto;">
+
+	<div class="menu_tab41">
+		<legend style="margin-top: 20px;">Share Your Thoughts</legend>
+		<form class="form-horizontal">
+		  <fieldset>
+		    <div class="form-group label-floating">
+			  <label class="control-label" for="topic_name">Name of the topic</label>
+			  <input class="form-control" id="topic_name" type="text">
+		    </div>
+		    <div class="form-group">
+		      <div class="col-md-12">
+		        <textarea class="form-control" rows="3" id="textArea"></textarea>
+		        <span class="help-block">Please provide detailed description about your suggestion or complaints.</span>
+		      </div>
+		    </div>
+		    <div class="form-group">
+			<label for="select222" class="col-md-2 control-label">Select Multiple</label>
+			<div class="col-md-10">
+				<select id="select222" multiple="" class="form-control">	
+					<option>Electricity</option>
+					<option>Hospital Administration</option>
+					<option>Police Administration</option>
+					<option>Education System</option>
+					<option>General Administration</option>
+					<option>Municipality</option>
+					<option>Others</option>
+				</select>
+			</div>
+		     </div>
+		     <div class="form-group">
+			<div class="col-md-10 col-md-offset-2">
+				<button type="button" class="btn btn-default">Cancel</button>
+				<button type="button" class="btn btn-primary" onclick="your_corner_sub();">Submit</button>
+			</div>
+		     </div>
+		</fieldset>
+	</form>
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+</div>
+
+<div id="wrapper5" style="padding-top:20px;">
+	<div style="width: 100%;text-align: center;">
+		<h1 class="text-success">News Feed</h1>
+	</div>
+
+	<div id="noti_div" style="overflow-y:auto;position:absolute;top:85px;bottom:0px;">
+	</div>
+
+</div>
+<!--<div id="noti_but" style="position:fixed;top:5px;margin:0 auto;">
+<a href="javascript:togg_notification();" class="btn btn-info btn-fab" style="padding:5px;"><img src="../img/ghonti.png" width="40px"></a>	
+</div>-->
+	<script src="jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="../js/material.min.js"></script>
+	<script src="../js/ripples.min.js"></script>
+
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+
+var tab_opened;
+var weatherIcons;
+var im;
+var map;
+var cur_pos;
+var markers=[];
+
+var pol_stn_arr=[];
+var muni_arr=[];
+
+var directionsDisplay;
+var directionsService;
+
+      function initMap() {
+
+
+	$.material.init();
+weatherIcons={
+  "200": {
+    "label": "thunderstorm with light rain",
+    "icon": "storm-showers"
+  },
+
+  "201": {
+    "label": "thunderstorm with rain",
+    "icon": "storm-showers"
+  },
+
+  "202": {
+    "label": "thunderstorm with heavy rain",
+    "icon": "storm-showers"
+  },
+
+  "210": {
+    "label": "light thunderstorm",
+    "icon": "storm-showers"
+  },
+
+  "211": {
+    "label": "thunderstorm",
+    "icon": "thunderstorm"
+  },
+
+  "212": {
+    "label": "heavy thunderstorm",
+    "icon": "thunderstorm"
+  },
+
+  "221": {
+    "label": "ragged thunderstorm",
+    "icon": "thunderstorm"
+  },
+
+  "230": {
+    "label": "thunderstorm with light drizzle",
+    "icon": "storm-showers"
+  },
+
+  "231": {
+    "label": "thunderstorm with drizzle",
+    "icon": "storm-showers"
+  },
+
+  "232": {
+    "label": "thunderstorm with heavy drizzle",
+    "icon": "storm-showers"
+  },
+
+  "300": {
+    "label": "light intensity drizzle",
+    "icon": "sprinkle"
+  },
+
+  "301": {
+    "label": "drizzle",
+    "icon": "sprinkle"
+  },
+
+  "302": {
+    "label": "heavy intensity drizzle",
+    "icon": "sprinkle"
+  },
+
+  "310": {
+    "label": "light intensity drizzle rain",
+    "icon": "sprinkle"
+  },
+
+  "311": {
+    "label": "drizzle rain",
+    "icon": "sprinkle"
+  },
+
+  "312": {
+    "label": "heavy intensity drizzle rain",
+    "icon": "sprinkle"
+  },
+
+  "313": {
+    "label": "shower rain and drizzle",
+    "icon": "sprinkle"
+  },
+
+  "314": {
+    "label": "heavy shower rain and drizzle",
+    "icon": "sprinkle"
+  },
+
+  "321": {
+    "label": "shower drizzle",
+    "icon": "sprinkle"
+  },
+
+  "500": {
+    "label": "light rain",
+    "icon": "rain"
+  },
+
+  "501": {
+    "label": "moderate rain",
+    "icon": "rain"
+  },
+
+  "502": {
+    "label": "heavy intensity rain",
+    "icon": "rain"
+  },
+
+  "503": {
+    "label": "very heavy rain",
+    "icon": "rain"
+  },
+
+  "504": {
+    "label": "extreme rain",
+    "icon": "rain"
+  },
+
+  "511": {
+    "label": "freezing rain",
+    "icon": "rain-mix"
+  },
+
+  "520": {
+    "label": "light intensity shower rain",
+    "icon": "showers"
+  },
+
+  "521": {
+    "label": "shower rain",
+    "icon": "showers"
+  },
+
+  "522": {
+    "label": "heavy intensity shower rain",
+    "icon": "showers"
+  },
+
+  "531": {
+    "label": "ragged shower rain",
+    "icon": "showers"
+  },
+
+  "600": {
+    "label": "light snow",
+    "icon": "snow"
+  },
+
+  "601": {
+    "label": "snow",
+    "icon": "snow"
+  },
+
+  "602": {
+    "label": "heavy snow",
+    "icon": "snow"
+  },
+
+  "611": {
+    "label": "sleet",
+    "icon": "sleet"
+  },
+
+  "612": {
+    "label": "shower sleet",
+    "icon": "sleet"
+  },
+
+  "615": {
+    "label": "light rain and snow",
+    "icon": "rain-mix"
+  },
+
+  "616": {
+    "label": "rain and snow",
+    "icon": "rain-mix"
+  },
+
+  "620": {
+    "label": "light shower snow",
+    "icon": "rain-mix"
+  },
+
+  "621": {
+    "label": "shower snow",
+    "icon": "rain-mix"
+  },
+
+  "622": {
+    "label": "heavy shower snow",
+    "icon": "rain-mix"
+  },
+
+  "701": {
+    "label": "mist",
+    "icon": "sprinkle"
+  },
+
+  "711": {
+    "label": "smoke",
+    "icon": "smoke"
+  },
+
+  "721": {
+    "label": "haze",
+    "icon": "day-haze"
+  },
+
+  "731": {
+    "label": "sand, dust whirls",
+    "icon": "cloudy-gusts"
+  },
+
+  "741": {
+    "label": "fog",
+    "icon": "fog"
+  },
+
+  "751": {
+    "label": "sand",
+    "icon": "cloudy-gusts"
+  },
+
+  "761": {
+    "label": "dust",
+    "icon": "dust"
+  },
+
+  "762": {
+    "label": "volcanic ash",
+    "icon": "smog"
+  },
+
+  "771": {
+    "label": "squalls",
+    "icon": "day-windy"
+  },
+
+  "781": {
+    "label": "tornado",
+    "icon": "tornado"
+  },
+
+  "800": {
+    "label": "clear sky",
+    "icon": "sunny"
+  },
+
+  "801": {
+    "label": "few clouds",
+    "icon": "cloudy"
+  },
+
+  "802": {
+    "label": "scattered clouds",
+    "icon": "cloudy"
+  },
+
+  "803": {
+    "label": "broken clouds",
+    "icon": "cloudy"
+  },
+
+  "804": {
+    "label": "overcast clouds",
+    "icon": "cloudy"
+  },
+
+
+  "900": {
+    "label": "tornado",
+    "icon": "tornado"
+  },
+
+  "901": {
+    "label": "tropical storm",
+    "icon": "hurricane"
+  },
+
+  "902": {
+    "label": "hurricane",
+    "icon": "hurricane"
+  },
+
+  "903": {
+    "label": "cold",
+    "icon": "snowflake-cold"
+  },
+
+  "904": {
+    "label": "hot",
+    "icon": "hot"
+  },
+
+  "905": {
+    "label": "windy",
+    "icon": "windy"
+  },
+
+  "906": {
+    "label": "hail",
+    "icon": "hail"
+  },
+
+  "951": {
+    "label": "calm",
+    "icon": "sunny"
+  },
+
+  "952": {
+    "label": "light breeze",
+    "icon": "cloudy-gusts"
+  },
+
+  "953": {
+    "label": "gentle breeze",
+    "icon": "cloudy-gusts"
+  },
+
+  "954": {
+    "label": "moderate breeze",
+    "icon": "cloudy-gusts"
+  },
+
+  "955": {
+    "label": "fresh breeze",
+    "icon": "cloudy-gusts"
+  },
+
+  "956": {
+    "label": "strong breeze",
+    "icon": "cloudy-gusts"
+  },
+
+  "957": {
+    "label": "high wind, near gale",
+    "icon": "cloudy-gusts"
+  },
+
+  "958": {
+    "label": "gale",
+    "icon": "cloudy-gusts"
+  },
+
+  "959": {
+    "label": "severe gale",
+    "icon": "cloudy-gusts"
+  },
+
+  "960": {
+    "label": "storm",
+    "icon": "thunderstorm"
+  },
+
+  "961": {
+    "label": "violent storm",
+    "icon": "thunderstorm"
+  },
+
+  "962": {
+    "label": "hurricane",
+    "icon": "cloudy-gusts"
+  }
+};
+
+var styles =[{"featureType":"all","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#dee6f0"},{"lightness":40},{"visibility":"on"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"off"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"},{"hue":"#ff0000"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#353c44"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#1c1e25"}]},{"featureType":"landscape.man_made","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"landscape.man_made","elementType":"labels.icon","stylers":[{"visibility":"on"},{"hue":"#e0ff00"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#1e212b"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#00cebd"},{"lightness":17},{"saturation":"11"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"labels.icon","stylers":[{"hue":"#ff7a00"},{"saturation":"79"},{"visibility":"on"},{"lightness":"-33"},{"gamma":"0.63"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#256a72"},{"saturation":"61"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"gamma":"1"},{"lightness":"0"},{"color":"#2d414b"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"transit.line","elementType":"geometry.fill","stylers":[{"color":"#eb0202"}]},{"featureType":"transit.station","elementType":"geometry.fill","stylers":[{"color":"#ff1d00"},{"saturation":"-35"},{"lightness":"-47"}]},{"featureType":"transit.station","elementType":"labels.icon","stylers":[{"hue":"#00d4ff"},{"visibility":"simplified"},{"lightness":"0"},{"saturation":"0"},{"gamma":"0.5"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}];
+
+  directionsService = new google.maps.DirectionsService();
+
+  var styledMap = new google.maps.StyledMapType(styles);
+
+  // Create a map object, and include the MapTypeId to add
+  // to the map type control.
+  
+       //var infoWindow = new google.maps.InfoWindow({map: map});
+
+var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 10000 });
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+	cur_pos=pos;
+var mapOptions = {
+    zoom: 10,
+    center: pos,
+    mapTypeControl: false,
+      scaleControl: false,
+      scrollwheel: false,
+      navigationControl: false,
+      streetViewControl: false,
+	//draggable: false,
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+    }
+  };
+
+
+	im = {
+		url: '../img/map_marker.png',
+		scaledSize: new google.maps.Size(35, 35)
+
+	};
+        map = new google.maps.Map(document.getElementById('map'),mapOptions);
+  map.mapTypes.set('map_style', styledMap);
+  map.setMapTypeId('map_style');
+
+	directionsDisplay = new google.maps.DirectionsRenderer({    polylineOptions: {
+      strokeColor: "#7FE817"
+    }});
+	directionsDisplay.setMap(map);
+	       var userMarker = new google.maps.Marker({
+		    position: pos,
+		    map: map,
+		    icon: im,
+		    animation: google.maps.Animation.DROP
+		});
+
+	  var request_police = {
+	    location: pos,
+	    radius: 10000,
+	    types: ['police'] // this is where you set the map to get the hospitals and health related places
+	  };
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request_police, populate_police_arr);
+
+$.getScript( "http://api.openweathermap.org/data/2.5/weather?lat="+pos.lat+"&lon="+pos.lng+"&units=metric&appid=38d184672322b4aefb77a5a2a8cb0708&callback=showValue", function( data, textStatus, jqxhr ) {
+  //alert( data ); // Data returned
+  //console.log( textStatus ); // Success
+  //console.log( jqxhr.status ); // 200
+  //console.log( "Load was performed." );
+});
+
+            //infoWindow.setPosition(pos);
+            //infoWindow.setContent('<div style="border-radius: 25px;background: #73AD21;padding: 20px;width: 200px;height: 150px;">Your Location</div>');
+            map.setCenter(pos);
+	$("#spin").css("display","none");
+          }, function() {
+	    alert("GPS Not Enabled");
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+  setMapOnAll(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+	Route_Erase();
+  clearMarkers();
+  markers = [];
+}
+
+function Route_Erase() {
+
+	directionsDisplay.setDirections({routes: []});
+}
+
+function Route() {
+
+  var start = cur_pos;
+  var end = place_temp2;
+  var request = {
+    origin: start,
+    destination: end,
+    travelMode: google.maps.TravelMode.WALKING
+  };
+  directionsService.route(request, function(result, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(result);
+    } else {
+      alert("couldn't get directions:" + status);
+    }
+  });
+}
+
+function show_hosp()
+{
+	if(tab_opened)
+	{
+		tab_opened.hide();
+	}
+	deleteMarkers();
+	  var request = {
+	    location: cur_pos,
+	    radius: 15000,
+	    types: ['hospital'] // this is where you set the map to get the hospitals and health related places
+	  };
+	infowindow = new google.maps.InfoWindow();
+	var service = new google.maps.places.PlacesService(map);
+	service.nearbySearch(request, searchHospitals);
+}
+function show_places_of_choice(type_given)
+{
+	deleteMarkers();
+	  var request = {
+	    location: cur_pos,
+	    radius: 15000,
+	    types: [type_given] // this is where you set the map to get the hospitals and health related places
+	  };
+	infowindow = new google.maps.InfoWindow();
+	var service = new google.maps.places.PlacesService(map);
+	service.nearbySearch(request, searchAll);
+}
+function show_plc()
+{
+	if(tab_opened)
+	{
+		tab_opened.hide();
+	}
+	tab_opened=$("#wrapper2");
+	$("#wrapper2").toggle("display");
+}
+function show_about_us()
+{
+	if(tab_opened)
+	{
+		tab_opened.hide();
+	}
+	tab_opened=$("#wrapper3");
+	$("#wrapper3").toggle("display");
+}
+function show_your_corner()
+{
+	if(tab_opened)
+	{
+		tab_opened.hide();
+	}
+	tab_opened=$("#wrapper4");
+	$("#wrapper4").toggle("display");
+}
+function onSuccess(position){
+        // Try HTML5 geolocation.
+	       var userMarker = new google.maps.Marker({
+		    position: position,
+		    map: map,
+		    icon: im,
+		    animation: google.maps.Animation.DROP
+		});
+}
+
+function searchHospitals(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+  }
+}
+function searchAll(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      addMarker(results[i]);
+    }
+  }
+}
+
+var pol_noti_arr=[" has released a wanted list.","'s superintendent has wished Happy Diwali to all fellow citizens."," is prepared for President of India, Mr. Paranab Mukherjee. He is about to visit, 21st of this month. We have tightened the security.","'s constable has been charged with bribery. He has been relieved of duty immediately."," Superintendent: 'It is our duty to protect you. We are here for you'"," Superintendent: A dangerous criminal has fled from jail. Please be aware, keep yourself safe from strangers. If you get any information, please let us know immediately."];
+function populate_police_arr(results,status)
+{
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      pol_stn_arr.push(results[i].name);
+    }
+  }
+}
+function populate_muni_arr(results,status)
+{
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      muni_arr.push(results[i].name);
+    }
+  }
+}
+
+function searchHospitals(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+  }
+}
+var place_temp,no_of_beds,place_temp2;
+function createMarker(place) {
+place_temp = place;
+//alert(place.name);
+  var placeLoc = place.geometry.location;
+//alert(JSON.stringify(placeLoc));
+  var marker = new google.maps.Marker({
+    map: map,
+    icon:im,
+    position: placeLoc
+  });
+	markers.push(marker);
+  google.maps.event.addListener(marker, 'click', function() {
+				    place_temp2 = place.geometry.location;
+				    infowindow.open(map, this);
+
+		$.ajax({
+        type: "GET",
+        url: 'https://urbanclueserver-stranger.rhcloud.com/hospital_details.php',
+        async:true,
+        dataType : 'jsonp',   
+        data:{
+					'hospital_name': place.name,
+        	hospital_lat: place.geometry.location.lat(),
+					hospital_lng: place.geometry.location.lng()
+				},
+        crossDomain:true,
+        success: function(data) {
+						var ea = data.emergency_availability;
+						var stmt;
+						if(ea == "0"){
+							stmt = "<span style='float: right;'><b>No beds available.</b></span>";
+						}else{
+							stmt = "<span style='float: right;'><input type='button' class='btn1' value='Book Emergency' onclick='performBooking()' ></span>";
+						}
+						var ratings = place.rating;
+						if((ratings === undefined) ||(ratings === null)){
+							ratings = "<b>Not Available</b>";
+						}
+						no_of_beds = data.no_of_beds;
+    				infowindow.setContent("<div><span style='font-weight:bold;'>"+place.name+"</span><br><span>"+place.vicinity+"</span><br><span>"+data.mob_no+"</span><br/><span><b>Beds Available:</b> "+no_of_beds+"</span><br><span><b>Ratings:</b></span>"+ratings+stmt+"<br><span style='float: right;'><input type='button' class='btn1' value='Get Directions' onclick='Route()' ></span>"+"</div>");
+        }
+    });
+  });
+
+}
+
+
+function addMarker(place) {
+	var location=place.geometry.location;
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+	google.maps.event.addListener(marker, 'click', function() {
+		place_temp2=location;
+	   infowindow.open(map,marker);
+	   infowindow.setContent("<div><span style='font-weight:bold;'>"+place.name+"</span><br><span>"+place.vicinity+"</span><br></div>"+"<span style='float: right;'><input type='button' class='btn1' value='Get Directions' onclick='Route()' ></span>");
+	});
+  markers.push(marker);
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+
+
+function performBooking(){
+		var email = 'gaurabpa1992@gmail.com';
+		$.ajax({
+        type: "GET",
+        url: 'http://192.168.1.42/icgw_server/emergency_booking_server.php',
+        data:{
+					hospital_name: place_temp.name,
+        	lat: place_temp.geometry.location.lat(),
+					lng: place_temp.geometry.location.lng(),
+					email:email,
+					bed_availability: no_of_beds
+				},
+        async:true,
+        dataType : 'jsonp',   
+        crossDomain:true,
+        success: function(data) {
+        	if(data<=-1){
+						alert("Booking Error! Please Try After Some Time.");
+					}else{
+						alert("Booking Successful. Booking ID: "+data);
+					}
+				}
+    });
+
+}
+function onError(error) {
+	alert("Network Issue, Make Sure Your Network Connection Is Working.");
+}
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+
+function showValue(msg){
+	 var prefix = 'wi wi-';
+	var main=msg.weather[0].main;
+	var temp=msg.main.temp;
+	var code = msg.weather[0].id;
+	  var icon = weatherIcons[code].icon;
+
+	  // If we are not in the ranges mentioned above, add a day/night prefix.
+	  if (!(code > 699 && code < 800) && !(code > 899 && code < 1000)) {
+	    icon = 'day-' + icon;
+	  }
+
+	  // Finally tack on the prefix.
+	  icon = prefix + icon;
+	$( "#weather-logo" ).addClass( icon );
+	//alert(temp);
+	document.getElementById("weather-temp").innerHTML=parseInt(temp)+"&degC";
+}
+
+function your_corner_sub(){
+	var tkt=Math.floor((Math.random() * 1000000) + 1);
+	tkt+=1000000;
+	alert("Thanks For Your Valuable Time. Your Ticket ID Is "+tkt);
+}
+
+function togg_notification(){
+	if(tab_opened)
+	{
+		tab_opened.hide();
+	}
+	tab_opened=$("#wrapper5");
+	$("#wrapper5").toggle("display");
+
+		var pol_stn_len=pol_stn_arr.length;
+		var pol_noti_arr_len=pol_noti_arr.length;
+		var html_str="";
+		for(var i=0;i<20;i++)
+		{
+			var msg=""+pol_stn_arr[Math.floor(Math.random() * pol_stn_len)] + pol_noti_arr[Math.floor(Math.random() * pol_noti_arr_len)];
+			var j=i+1;
+			html_str+='<div class="noti_div_small" id="div'+j+'" style="">'+msg+'</div>';
+		}	
+			$("#noti_div").html(html_str);
+            var myInterval = false;
+            var index = 0;
+            var elements = ["#div1","#div2","#div3","#div4","#div5","#div6","#div7","#div8","#div9","#div10","#div11","#div12","#div13","#div14","#div15","#div16","#div17","#div18","#div19","#div20"];
+            myInterval = setInterval(AutoScroll, 4000);
+		var to_be_shifted=0;
+            function AutoScroll() {
+		to_be_shifted = ($(elements[index]).height()+to_be_shifted);
+//alert(index+" " + elements.length +" " + $(elements[index]).offset().top);
+                $('#noti_div').animate({
+                    scrollTop: to_be_shifted
+                }, 1000);
+
+                if(index < (elements.length - 1)){
+                    index++;
+                } else {
+                    index = 0;
+			to_be_shifted=0;
+                }
+            }
+
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAATfAA7g6ivh2Rj3NMdyK7vbpMW3jszoI&callback=initMap&libraries=places">
+    </script>
+    <!--<script async defer
+    src="http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&units=metric&appid=38d184672322b4aefb77a5a2a8cb0708&callback=showValue">-->
+    </script>
+  </body>
+</html>

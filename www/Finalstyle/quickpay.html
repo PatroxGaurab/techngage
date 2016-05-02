@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>nativeDroid II - jQueryMobile Template</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/test.css" />
+		<style>
+			/* Prevent FOUC */
+			body { opacity: 0;}
+		</style>
+		
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	</head>
+	<body>
+
+		<div data-role="page" class="m2grad">
+			
+			<div role="main" class="ui-content" data-inset="false">
+				<div data-role="header" data-position="fixed" class="m252">
+					<h1 class="wow fadeIn" data-wow-delay='0.4s'>CESC</h1><div class="ui-btn-right" style="background:white"><img style="height:4em;padding:2px" src="logo.png"></div>
+				</div>
+				
+				<label for="custid">Customer ID:</label>
+				<input type="text" name="custid" id="custid" value="" data-clear-btn="true" placeholder="11 digit customer id as found in your bill">				
+				<!--Load dynamically-->
+				<h3>Latest Bill</h3>
+				<hr>
+				<div class="row">
+					<div class="col-xs-4 col-md-3 col-lg-2">
+						Bill for:
+					</div>
+					<div class="col-xs-8 col-md-9 col-lg-10">
+						September 2015
+					</div>
+				</div><br>
+				<div class="row">
+					<div class="col-xs-4 col-md-3 col-lg-2">
+						Amount:
+					</div>
+					<div class="col-xs-8 col-md-9 col-lg-10">
+						Rs.1337.00
+					</div>
+				</div><br>
+				<div class="row">
+					<div class="col-xs-4 col-md-3 col-lg-2">
+						Due date:
+					</div>
+					<div class="col-xs-8 col-md-9 col-lg-10">
+						October 21
+					</div>
+				</div><br>	
+					<div data-role="collapsible-set" data-inset="false">
+						<div data-role="collapsible">
+							<h3>Pay via Card</h3>
+							<div class='inset'>
+								<a href="#" class="ui-btn ui-btn-raised m252">Pay Via Credit Card</a><br>
+								<a href="#" class="ui-btn ui-btn-raised m252">Pay Via Debit Card</a><br>
+							</div>
+						</div>
+						<div data-role="collapsible">
+							<h3>Pay Via Netbanking</h3>
+							<div class='inset'>
+								<label for="select-choice-1b" class="select">Select Your Banking Gateway</label>
+								<select name="select-choice-1" id="select-choice-1b" data-native-menu="false">
+									<option value="javascript">HDFC BANK</option>
+									<option value="css">STATE BANK OF INDIA</option>
+									<option value="html">AXIS BANK</option>
+									<option value="csharp">ICICI BANK</option>
+									<option value="java">KENABECHA BANK</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				<hr>
+				<a href="start.html" data-role="button" class="ui-btn ui-btn-primary"><i class='zmdi zmdi-close'></i> Cancel</a>				
+				<nd2-include data-src="footer.html"></nd2-include>
+			</div>
+			
+		</div>
+
+		<script src="vendor/jquery.min.js"></script>
+		<script src="vendor/jquery-ui.min.js"></script>
+		<script src="vendor/jquery.mobile.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+
+	</body>
+</html>

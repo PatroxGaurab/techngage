@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>nativeDroid II - jQueryMobile Template</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="vendor/chartist/style.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/test.css" />
+		<style>
+			/* Prevent FOUC */
+			body { opacity: 0;}
+		</style>
+		
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	</head>
+	<body>
+
+		<div data-role="page" class="m3grad">
+			<nd2-include data-src="leftpanel.html"></nd2-include>
+			
+			<div role="main" class="ui-content" data-inset="false">
+				<div data-role="header" data-position="fixed" class="m253">
+					<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-menu"></i></a>
+					<h1 class="wow fadeIn" data-wow-delay='0.4s'>CESC</h1><div class="ui-btn-right" style="background:white"><img style="height:4em;padding:2px" src="logo.png"></div>
+				</div>
+				<h3><i class='zmdi zmdi-chart' style="color:purple"></i>Consumption vs <i class='zmdi zmdi-chart' style="color:teal"></i>Bill Amount for last 12 months</h3>
+				<div class="box">
+					<div class="nd2-chart ct-chart3 ct-chart-theme" style="height:100%"></div>
+				</div>				
+				<nd2-include data-src="footer.html"></nd2-include>
+			</div>
+			
+		</div>
+
+		<script src="vendor/jquery.min.js"></script>
+		<script src="vendor/jquery-ui.min.js"></script>
+		<script src="vendor/jquery.mobile.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="vendor/chartist/chartist.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+		<script>		
+			new Chartist.Line('.ct-chart3', {
+				labels: ['Sep 15', 'Aug 15', 'Jul 15', 'Jun 15', 'May 15','Apr 15','Mar 15','Feb 15','Jan 15','Dec 14','Nov 14','Oct 14'],
+				series: [
+					[1320,1980,2050,2820,2710,1890,1770,1330,980,1030,1420,1100],
+					[2060,3050,4503,5300,4034,3455,3093,2400,1820,2007,2122,1791]
+				]}, {
+				  showArea: false,
+				  showLine: true,
+				  showPoint: true,
+				  fullWidth: true,
+				  height:window.innerHeight*.6,
+				  chartPadding: {left:10, right:25, top:20, bottom:15},
+				  axisX: {
+					showLabel: true,
+					showGrid: false
+				  },
+				  axisY: {
+					showLabel: true,
+					showGrid: true
+				  }
+				});
+		</script>
+	</body>
+</html>

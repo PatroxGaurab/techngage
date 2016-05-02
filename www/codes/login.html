@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <!--meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"-->
+	<!--meta http-equiv="Content-Security-Policy" content="default-src 'self' http://*; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"-->
+<meta http-equiv="Content-Security-Policy" 
+         content="default-src *; 
+                  style-src * 'self' 'unsafe-inline' 'unsafe-eval'; 
+                  script-src * 'self' 'unsafe-inline' 'unsafe-eval';">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>Login</title>
+    <meta charset="utf-8">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/ripples.css">
+
+  </head>
+  <body>
+
+        <div class="app">
+            	<div id="deviceready" class="blink">
+		  <div id="login_div" style="display:none;">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4" style="padding-left: 40px;padding-right: 40px;vertical-align: middle;">
+					<div class="form-group label-floating">	
+					  	<label class="control-label" for="email">Enter your email</label>
+					  	<input type="email" class="form-control" name="email" id="email"/>
+					</div>
+					<div style="text-align: center;">
+						<a href="javascript:void(0)" class="btn btn-raised btn-info" id="login_btn">Login</a>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		   </div>
+                </div>
+	</div>
+     
+		<script src="jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+		<script src="../js/material.min.js"></script>
+		<script src="../js/ripples.min.js"></script>
+		<script type="text/javascript" src="../cordova.js"></script>
+		<script type="text/javascript" src="../js/index.js"></script>
+	</body>
+
+</html>

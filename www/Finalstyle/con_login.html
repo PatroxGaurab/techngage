@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Bill Pay Redirect</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/test.css" />
+		<style>
+			/* Prevent FOUC */
+			body { opacity: 0;}
+		</style>
+		
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	</head>
+	<body onload="pay_redirect()">
+
+		<div data-role="page" class="m2grad">
+			
+			<div role="main" class="ui-content" data-inset="false">
+				<div data-role="header" data-position="fixed" class="m252">
+					<h1 class="wow fadeIn" data-wow-delay='0.4s'>CESC</h1><div class="ui-btn-right" style="background:white"><img style="height:4em;padding:2px" src="logo.png"></div>
+				</div>
+				<img src="css/images/ajax-loader.gif">
+			</div>
+			
+		</div>
+	<form method="post" action="http://cesc.co.in/ptrlineins/quickpay_mobapp/paymentapp.php" id="pay_with_cons_id">
+		<input type="hidden" name="txt_custid" id="txt_custid">
+	</form>
+	<form method="post" action="http://cesc.co.in/ptrlineins/quickpay_mobapp/paymentapp.php" id="pay_without_cons_id">
+	</form>
+	<script>
+		//set_cons_id();
+		//window.localStorage.removeItem("storemyjson");
+		function get_cons_id(){
+			if (window.localStorage.getItem("storemyjson") != null) {
+				var value = window.localStorage.getItem("storemyjson");
+				var parsedData = JSON.parse(value);
+				return parsedData.custid;
+			}
+			else{
+				return 0;
+			}
+
+		}
+		function pay_redirect(){
+			var customer_id = get_cons_id();
+			if(customer_id!="0")
+			{		
+				document.getElementById("txt_custid").value = customer_id;
+				document.getElementById("pay_with_cons_id").submit();
+			}
+			else
+			{
+				document.getElementById("pay_without_cons_id").submit();
+			}
+		}
+	</script>
+		<script src="vendor/jquery.min.js"></script>
+		<script src="vendor/jquery-ui.min.js"></script>
+		<script src="vendor/jquery.mobile.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+
+	</body>
+</html>
